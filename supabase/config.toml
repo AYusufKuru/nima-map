@@ -1,0 +1,8 @@
+# Edge Function: tarayıcı CORS preflight (OPTIONS) isteği JWT taşımaz.
+# verify_jwt=true iken API geçidi OPTIONS’a 401 döner → “blocked by CORS / preflight HTTP ok değil”.
+# https://supabase.com/docs/guides/functions/function-configuration
+[functions.create-user]
+verify_jwt = false
+
+[functions.delete-user]
+verify_jwt = false

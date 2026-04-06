@@ -1,0 +1,20 @@
+/**
+ * Mobil galeri hissi: kenar orta tutamaçları + daha geniş sürükleme çubukları.
+ * react-image-crop coarse pointer’da ord-n/e/s/w’yi gizliyor; burada tekrar açıyoruz.
+ */
+.logo-crop-mobile-like.ReactCrop {
+  --rc-drag-handle-size: 20px;
+  --rc-drag-handle-mobile-size: 28px;
+  --rc-drag-bar-size: 18px;
+  --rc-drag-handle-bg-colour: rgba(255, 255, 255, 0.98);
+  --rc-border-color: rgba(99, 102, 241, 0.95);
+}
+
+@media (pointer: coarse) {
+  .logo-crop-mobile-like.ReactCrop .ord-n,
+  .logo-crop-mobile-like.ReactCrop .ord-e,
+  .logo-crop-mobile-like.ReactCrop .ord-s,
+  .logo-crop-mobile-like.ReactCrop .ord-w {
+    display: block !important;
+  }
+}

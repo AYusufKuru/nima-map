@@ -1,0 +1,330 @@
+/* JUMBO PRESTIGE v11 - MODERN DESIGN SYSTEM */
+:root {
+    --v11-primary: #1abc9c;
+    --v11-dark: #0f172a;
+    --v11-card: #ffffff;
+    --v11-border: #e2e8f0;
+    --v11-green: #10b981;
+    --v11-red: #f43f5e;
+    --v11-orange: #f59e0b;
+    --v11-font: 'Outfit', sans-serif;
+}
+
+#sidebarContent { transition: opacity 0.3s ease; }
+
+.v11-header-nav { margin-bottom: 25px; padding-bottom: 15px; border-bottom: 2px solid #f1f5f9; }
+.v11-back-btn { background: #f1f5f9; border: none; padding: 6px 12px; border-radius: 8px; font-size: 0.7rem; font-weight: 800; cursor: pointer; color: var(--v11-primary); transition: 0.2s; display: flex; align-items: center; gap: 5px; margin-bottom: 15px; }
+.v11-back-btn:hover { background: var(--v11-primary); color: white; transform: translateX(-5px); }
+.v11-header-nav h2 { font-size: 1.6rem; color: var(--v11-dark); font-weight: 800; }
+
+/* Dashboard Cards - YARI BOYUTA İNDİRİLDİ */
+.v11-region-card {
+    background: white; border: 1px solid var(--v11-border); border-radius: 14px;
+    padding: 12px; margin-bottom: 12px; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.v11-region-card:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.06); border-color: var(--v11-primary); }
+
+.v11-card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.v11-card-top h3 { font-size: 0.95rem; color: var(--v11-dark); font-weight: 850; }
+.v11-count { background: #f1f5f9; padding: 2px 8px; border-radius: 6px; font-size: 0.6rem; font-weight: 900; color: #64748b; }
+
+.v11-card-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+.v11-m-item small { display: block; font-size: 0.55rem; color: #94a3b8; font-weight: 800; text-transform: uppercase; margin-bottom: 2px; }
+.v11-m-item strong { font-size: 0.9rem; color: var(--v11-dark); }
+.v11-m-item strong.green { color: var(--v11-green); }
+.v11-m-item strong.orange { color: var(--v11-orange); }
+.v11-m-item strong.red { color: var(--v11-red); }
+
+.v11-prog-bg { height: 4px; background: #f1f5f9; border-radius: 2px; margin-bottom: 12px; overflow: hidden; }
+.v11-prog-fill { height: 100%; background: var(--v11-primary); border-radius: 2px; }
+
+.v11-btn-drill { width: 100%; padding: 8px; background: var(--v11-dark); color: white; border: none; border-radius: 10px; font-weight: 800; font-size: 0.7rem; cursor: pointer; transition: 0.2s; display: flex; justify-content: center; align-items: center; gap: 8px; }
+.v11-btn-drill:hover { background: var(--v11-primary); }
+
+/* AKILLI GRİD TASARIM (Dinamik Genişleme Kutuları Sıralar) */
+.v11-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+    align-items: start;
+}
+.v11-grid-container > .v11-region-card,
+.v11-grid-container > .v11-list-row {
+    margin-bottom: 0; /* Grid kullandıgımız için alttan marginleri silebiliriz */
+}
+
+/* List rows - YARI BOYUTA İNDİRİLDİ */
+.v11-list-row { background: white; padding: 10px 14px; border-radius: 10px; border: 1px solid #f1f5f9; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: 0.2s; }
+.v11-list-row:hover { border-color: var(--v11-primary); transform: translateX(5px); box-shadow: 0 5px 10px rgba(0,0,0,0.03); }
+.v11-row-main strong { display: block; font-size: 0.85rem; color: var(--v11-dark); }
+.v11-row-main p { font-size: 0.55rem; color: #94a3b8; font-weight: 600; margin-top: 2px; }
+.v11-row-data { text-align: right; display: flex; align-items: center; gap: 8px; }
+.v11-rev-txt { font-weight: 800; color: var(--v11-green); font-size: 0.8rem; }
+.v11-dot { width: 6px; height: 6px; border-radius: 50%; }
+.v11-dot.active { background: var(--v11-green); box-shadow: 0 0 6px var(--v11-green); }
+.v11-dot.warn { background: var(--v11-orange); }
+
+/* Store Master Card - YARI BOYUTA İNDİRİLDİ */
+.v11-store-master { animation: v11FadeIn 0.4s easeOut; }
+@keyframes v11FadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+.v11-hero-section { display: flex; align-items: center; gap: 15px; margin-bottom: 30px; position: relative; background: #f8fafc; padding: 20px; border-radius: 18px; border: 1px solid #f1f5f9; }
+.v11-hero-avatar { font-size: 2.2rem; color: var(--v11-primary); }
+.v11-hero-text label { display: block; font-size: 0.55rem; color: #94a3b8; font-weight: 900; }
+.v11-hero-text strong { font-size: 1.15rem; color: var(--v11-dark); }
+.v11-status-pill { position: absolute; top: 15px; right: 15px; font-size: 0.55rem; font-weight: 900; padding: 4px 10px; border-radius: 8px; }
+.v11-status-pill.on { background: #dcfce7; color: #166534; }
+.v11-status-pill.off { background: #fee2e2; color: #991b1b; }
+
+.v11-grid-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 25px; }
+.v11-stat-box { background: white; padding: 18px; border-radius: 15px; border: 1px solid #f1f5f9; box-shadow: 0 4px 6px rgba(0,0,0,0.01); }
+.v11-stat-box label { display: block; font-size: 0.55rem; color: #94a3b8; font-weight: 900; margin-bottom: 6px; }
+.v11-stat-box strong { font-size: 1.1rem; color: var(--v11-dark); }
+.v11-stat-box .green { color: var(--v11-green); }
+.v11-stat-box .red { color: var(--v11-red); }
+
+.v11-live-chart { margin-bottom: 30px; padding: 20px; background: white; border-radius: 18px; border: 1px solid #f1f5f9; }
+.v11-live-chart label { display: block; font-size: 0.6rem; color: #94a3b8; font-weight: 900; margin-bottom: 18px; }
+.v11-bars { display: flex; align-items: flex-end; gap: 5px; height: 80px; padding: 0 5px; border-bottom: 1px solid #f1f5f9; }
+.v11-bar { flex: 1; background: var(--v11-primary); border-radius: 4px 4px 0 0; min-height: 5px; opacity: 0.5; transition: 0.3s; }
+.v11-bar:hover { opacity: 1; transform: scaleY(1.05); }
+
+.v11-detailed-metrics { margin-bottom: 25px; }
+.v11-detail-row { display: flex; justify-content: space-between; padding: 12px 10px; border-bottom: 1px solid #f8fafc; font-size: 0.8rem; }
+.v11-detail-row span { color: #64748b; font-weight: 500; }
+
+.v11-action-hub { display: flex; flex-direction: column; gap: 10px; }
+.v11-primary-btn { background: var(--v11-primary); color: white; border: none; padding: 16px; border-radius: 14px; font-weight: 800; font-size: 0.8rem; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 10px; }
+.v11-secondary-btn { background: #f1f5f9; color: var(--v11-dark); border: none; padding: 16px; border-radius: 14px; font-weight: 700; font-size: 0.75rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; }
+.v11-primary-btn:hover { background: #16a085; transform: translateY(-2px); }
+
+/* Map Pins v11 */
+.v11-cluster { background: var(--v11-primary); border: 4px solid white; border-radius: 50%; color: white; font-weight: 900; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(26, 188, 156, 0.4); border-radius: 15px; }
+.v11-sm { width: 40px; height: 35px; border-radius: 10px; font-size: 0.75rem; }
+.v11-md { width: 45px; height: 40px; border-radius: 12px; font-size: 0.85rem; background: #16a085; }
+.v11-lg { width: 55px; height: 50px; border-radius: 15px; font-size: 1rem; background: #0e6251; }
+
+.v11-pin { width: 30px; height: 30px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 14px; border: 2px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+
+.v11-map-tip { background: #0f172a !important; color: white !important; border: none !important; border-radius: 12px !important; padding: 12px 16px !important; box-shadow: 0 15px 35px rgba(0,0,0,0.3); font-family: var(--v11-font); }
+.tip-id { font-weight: 900; color: var(--v11-primary); font-size: 0.8rem; margin-bottom: 5px; }
+.tip-rev { font-size: 0.75rem; color: #e2e8f0; }
+.tip-perf { font-size: 0.75rem; margin-top: 2px; }
+
+/* Fast Add Button */
+.fast-add-btn {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 100px;
+    font-family: var(--v11-font, 'Outfit', sans-serif);
+    font-size: 1rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.fast-add-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 15px 35px rgba(37, 99, 235, 0.5);
+}
+.fast-add-btn i {
+    font-size: 1.3rem;
+}
+
+/* ==============================================================
+   SCROLLBAR GİZLEME VE DESKTOP RESIZER
+   ============================================================== */
+.sidebar-content {
+    -ms-overflow-style: none; /* IE ve Edge */
+    scrollbar-width: none; /* Firefox */
+}
+.sidebar-content::-webkit-scrollbar {
+    display: none; /* Safari ve Chrome */
+}
+
+/* Masaüstü Sidebar Resize (Genişletme) Çubuğu */
+.desktop-resizer {
+    width: 6px;
+    background: #e2e8f0;
+    cursor: col-resize;
+    z-index: 1000;
+    flex-shrink: 0;
+    transition: background 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: inset 1px 0 3px rgba(0,0,0,0.03);
+}
+.desktop-resizer:hover, .desktop-resizer.active {
+    background: #3b82f6; /* Hover durumunda premium mavi */
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+}
+
+/* ==============================================================
+   MOBILE RESPONSIVE DESIGN (PREMIUM BOTTOM SHEET)
+   ============================================================== */
+@media screen and (max-width: 900px) {
+    #app {
+        flex-direction: column-reverse; /* Harita Üste, Yan Menü Alta (Bottom Sheet) */
+    }
+    
+    .map-frame {
+        width: 100%;
+        height: 48vh; /* Harita üstte daha iyi oranlandı */
+        flex: none;
+    }
+    
+    .sidebar {
+        width: 100%;
+        height: 56vh;
+        border-radius: 24px 24px 0 0; /* Premium pürüzsüz kıvrım */
+        box-shadow: 0 -10px 40px rgba(15, 23, 42, 0.15);
+        z-index: 2000;
+        margin-top: -24px; /* Haritayla kaynaşma efekti */
+        position: relative;
+        background: #f8fafc; /* Daha modern zemin */
+    }
+    
+    /* Mobil Handle Çizgisi */
+    .sidebar::before {
+        content: '';
+        position: absolute;
+        top: 12px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 45px;
+        height: 4px;
+        background: #cbd5e1;
+        border-radius: 4px;
+        z-index: 2001;
+    }
+
+    /* Daha dar alanlarda yer kazanmak için başlıkları kompaktlaştırma */
+    .sidebar-header {
+        padding: 24px 12px 12px 12px;
+        background: white; 
+        border-radius: 20px 20px 0 0;
+    }
+
+    .border-bottom { border-bottom: 1px solid #e2e8f0; }
+
+    .global-kpis {
+        margin-top: 0;
+        gap: 8px; /* Daraltıldı */
+        justify-content: space-around;
+        padding-bottom: 5px;
+    }
+    
+    .kpi { text-align: center; }
+    
+    .kpi small { font-size: 0.5rem; color: #94a3b8; letter-spacing: 0px; } /* Yazılar ufaldı */
+    .kpi strong { font-size: 0.95rem; }
+
+    .search-section {
+        padding: 8px 12px;
+        background: white;
+        margin-bottom: 0px; 
+    }
+    
+    .search-bar { margin-bottom: 0; border-radius: 12px; padding: 4px 10px; }
+    .search-bar input { font-size: 0.85rem; padding: 4px; }
+
+    .sidebar-content {
+        padding: 10px 12px; /* Çok dar alanlı akıllı padding */
+    }
+    
+    /* Hızlı Ekle butonu mobilde çok daha zarif ve konum olarak daha dengeli */
+    .map-controls-top {
+        top: 15px;
+        right: 12px;
+    }
+    
+    .fast-add-btn {
+        padding: 8px 14px; /* Buton ufaldı */
+        font-size: 0.8rem;
+        border-radius: 50px;
+        box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3);
+    }
+    
+    .v11-region-card {
+        padding: 14px; /* Kutu içi daha minimal */
+        border-radius: 14px;
+        margin-bottom: 12px;
+    }
+    
+    .v11-card-top { margin-bottom: 10px; } /* Kutunun üstündeki boşluk */
+    .v11-card-top h3 { font-size: 0.95rem; }
+    
+    .v11-card-metrics { gap: 8px; margin-bottom: 12px; } /* İstatisitkler de yaklaştı */
+    .v11-m-item small { font-size: 0.5rem; }
+    .v11-m-item strong { font-size: 0.9rem; }
+    
+    .v11-btn-drill { padding: 10px; font-size: 0.7rem; border-radius: 10px; gap: 6px; }
+    
+    .v11-header-nav { margin-bottom: 10px; padding-bottom: 8px; }
+    .v11-header-nav h2 { font-size: 1.15rem; }
+    
+    .v11-back-btn { font-size: 0.65rem; padding: 6px 10px; margin-bottom: 8px; }
+    
+    /* Mobil Liste Düzeni */
+    .v11-list-row { padding: 10px 14px; border-radius: 10px; margin-bottom: 6px; }
+    .v11-row-main strong { font-size: 0.85rem; }
+    .v11-row-data button { font-size: 14px; }
+    
+    /* Detaylı İstatistik Izgaraları Telefonda Yan Yana Ufak ya da Alt Alta Görünsün */
+    .v11-grid-stats {
+        grid-template-columns: 1fr 1fr; 
+        gap: 8px;
+        margin-bottom: 15px;
+    }
+    
+    .v11-stat-box { padding: 10px; border-radius: 10px; } /* Daha küçük istatistik panelleri */
+    .v11-stat-box label { font-size: 0.45rem; margin-bottom: 4px; }
+    .v11-stat-box strong { font-size: 0.9rem; }
+    
+    .v11-hero-section { padding: 12px; gap: 8px; margin-bottom: 15px; flex-direction: column; align-items: flex-start; text-align: left; }
+    .v11-hero-avatar { font-size: 1.5rem; }
+    
+    .v11-primary-btn, .v11-secondary-btn { padding: 10px; font-size: 0.75rem; border-radius: 10px; }
+    
+    /* MODAL VE EKRANLARI MOBİLE ÖZEL YUVARLAYALIM */
+    .v11-dropdown-menu, #addTypeDropdown {
+        width: 100%;
+        left: 0; right: 0; padding: 10px; border-radius: 14px;
+    }
+    
+    /* Ekleme Moduna Girildiğinde (app-adding-mode tetiklendiğinde) */
+    #app.app-adding-mode {
+        /* Harita tam ekran hissedilsin */
+    }
+    #app.app-adding-mode .sidebar {
+        height: 12vh; /* Navigasyon tamamen aşağı iner sadece küçücük handle kalır */
+        overflow: hidden;
+    }
+    #app.app-adding-mode .map-frame {
+        height: 88vh; /* Harita devasa büyür, tıklamak çok rahatlar */
+    }
+
+    /* MOBİL İÇİN YENİ EXPORT/DÜZENLE PANELİ GRİD DÜZENLEMESİ */
+    .export-panel-grid {
+        grid-template-columns: repeat(2, 1fr) !important; /* Mobilde 4 yan yana çok sıkışır, 2x2 grid yapalım */
+        gap: 8px !important;
+    }
+    .export-panel-grid button {
+        padding: 10px 6px !important;
+        font-size: 0.70rem !important;
+        min-width: unset !important;
+    }
+    .export-panel-grid button i {
+        font-size: 18px !important;
+    }
+}
+
+/* ==============================================================
+   OVERRIDING OLD STYLE BUG (WHITE SPACES)
+   ============================================================== */
+.global-kpis {
+    margin-top: 20px !important; /* Eski 60px olan devasa boşluğu global olarak tamamen engelle */
+}

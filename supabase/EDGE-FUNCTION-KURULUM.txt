@@ -1,0 +1,66 @@
+İlk yönetici + panelden kullanıcı ekleme için Edge Function gerekir (bir kez kurulur).
+
+1) Supabase CLI yüklü olsun: npm i -g supabase
+2) Proje kökünde: supabase login && supabase link --project-ref PROJE_REF
+3) Secret’lar (Supabase Dashboard → Project Settings → Edge Functions veya CLI):
+
+   Kurulum anahtarı (ilk admin için):
+   supabase secrets set BOOTSTRAP_SECRET="buraya-uzun-rastgele-bir-dize"
+
+   Tarayıcıdan hangi adreslerin fonksiyonu çağırabileceği (virgülle, boşluksuz):
+   supabase secrets set ALLOWED_ORIGINS="http://localhost:8081,http://127.0.0.1:8081,https://SIZIN-PRODUCTION-ALAN-ADINIZ"
+
+   ALLOWED_ORIGINS tanımlı değilse yalnızca yerel Expo portları (8081, 19006 vb.) kabul edilir;
+   canlı siteyi kullanırken mutlaka kendi https adresinizi ekleyin — aksi halde 403 alırsınız.
+
+4) Deploy (JWT doğrulamasını kapat — zorunlu, yoksa tarayıcıda CORS/preflight hatası):
+   supabase functions deploy create-user --no-verify-jwt
+
+   Aynı ayar supabase/config.toml içinde [functions.create-user] verify_jwt = false ile de kalıcıdır.
+   Dashboard’da eski deploy kaldıysa bu komutu tekrar çalıştır.
+
+   --no-verify-jwt: Geçit OPTIONS (CORS) isteğini reddetmez; bootstrap oturumsuz çalışır;
+   “create” modunda yetki fonksiyon içinde Bearer token ile kontrol edilir.
+
+5) Supabase Dashboard → SQL: profiles-setup.sql (has_admin dahil) çalışmış olmalı.
+
+6) Tarayıcıda: http://localhost:8081/admin/users
+   - Hiç admin yoksa: BOOTSTRAP_SECRET değerini gir → ilk yöneticiyi oluştur.
+   - Sonra giriş yap; aynı sayfadan diğer kullanıcıları ekle.
+
+Not: Service role anahtarı yalnızca Supabase sunucusunda kalır; uygulama koduna veya EXPO_PUBLIC ile asla koymayın.
+
+--- Ne yapmalısın (özet) ---
+A) Bilgisayarında terminal aç, proje klasörüne gir (nima-map).
+B) Supabase CLI kur:  npm i -g supabase
+C) Bir kez giriş ve proje bağla:
+   supabase login
+   supabase link --project-ref BURAYA_KENDI_REF_IN
+   (Ref: Supabase Dashboard → Project Settings → General → Reference ID)
+D) İlk kurulumda secret (yoksa):
+   supabase secrets set BOOTSTRAP_SECRET="uzun-rastgele-gizli-bir-metin"
+E) Fonksiyonu yükle (CORS için JWT kapalı — aşağıda güvenlik açıklaması var):
+   supabase functions deploy create-user --no-verify-jwt
+F) Tarayıcıda sayfayı yenile, tekrar dene.
+
+--- Güvenlik: verify_jwt=false açık mı? ---
+Hayır; “herkese açık API” anlamına gelmez.
+
+• Supabase geçidinde JWT kontrolü kapalı olsa da, kodunun içinde kontrol var:
+  - mode=bootstrap: Sadece doğru BOOTSTRAP_SECRET ile çalışır (sadece sunucuda, secret olarak).
+    Ve veritabanında hiç admin yokken kuruluma izin verir; admin varken reddeder.
+  - mode=create: Authorization: Bearer ... ile gelen token doğrulanır; profiles tablosunda
+    role=admin değilse işlem yapılmaz.
+
+• Tarayıcıdan görünen anon key zaten herkese açıktır; asıl koruma RLS + bu fonksiyonun
+  mantığı + bootstrap secret + admin kontrolüdür.
+
+• Service role anahtarı yalnızca Edge Function ortam değişkeninde (Supabase tarafında);
+  istemci bundle’ında asla olmamalı.
+
+Özet: Bu yapı, tarayıcıdan çağrılabilen Edge Function’lar için yaygın ve doğru modeldir;
+güvenlik, geçit JWT’si yerine fonksiyon içi kurallarda ve secret’larda durur.
+
+Ek sıkılaştırma (kodda): Access-Control-Allow-Origin artık `*` değil; yalnızca ALLOWED_ORIGINS
+(veya varsayılan localhost listesi) içindeki Origin değerine yanıt verilir. Böylece başka bir
+web sitesinden tarayıcı üzerinden bu endpoint’e istek atılması engellenir (CORS ile).
