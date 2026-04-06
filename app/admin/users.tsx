@@ -4,7 +4,6 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useAdminToast } from '@/contexts/AdminToastContext';
 import { useMunicipalities } from '@/contexts/MunicipalitiesContext';
 import { asHref } from '@/utils/asHref';
-import { useWebTabVisible } from '@/hooks/useWebTabVisible';
 import { getFunctionInvokeErrorMessage } from '@/utils/parseSupabaseFunctionError';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Link, Redirect, router } from 'expo-router';
@@ -126,13 +125,6 @@ export default function AdminUsersScreen() {
   useEffect(() => {
     if (userListPage > userListPageCount) setUserListPage(userListPageCount);
   }, [userListPage, userListPageCount]);
-
-  useWebTabVisible(
-    () => {
-      if (hasAdmin && session && profile?.role === 'admin') void loadProfiles();
-    },
-    Platform.OS === 'web' && !!hasAdmin && !!session && profile?.role === 'admin'
-  );
 
   const runBootstrap = async () => {
     if (!bootEmail.trim() || !bootPassword || !bootSecret.trim()) {

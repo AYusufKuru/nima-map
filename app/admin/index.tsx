@@ -29,7 +29,6 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { supabase } from '../../supabase';
-import { useWebTabVisible } from '@/hooks/useWebTabVisible';
 import { downloadReportsZip } from '@/utils/bulkDownloadReportsZip';
 import { extractReportsStoragePath } from '@/utils/reportsStoragePath';
 
@@ -445,13 +444,6 @@ export default function AdminScreen() {
       setRawRows([]);
     }
   }, [session, isAdmin, selectedProvince, runQuery]);
-
-  useWebTabVisible(
-    () => {
-      if (session && isAdmin && selectedProvince.trim()) void runQuery();
-    },
-    Platform.OS === 'web' && !!session && isAdmin && !!selectedProvince.trim()
-  );
 
   const clearFilters = () => {
     setSearchText('');
