@@ -7,7 +7,7 @@ import { asHref } from '@/utils/asHref';
 import { getFunctionInvokeErrorMessage } from '@/utils/parseSupabaseFunctionError';
 import { WEB_APP_RESUME_EVENT } from '@/utils/webAppResume';
 import { MaterialIcons } from '@expo/vector-icons';
-import { Link, Redirect, router } from 'expo-router';
+import { Link, Redirect, router, useFocusEffect } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
     ActivityIndicator,
@@ -126,6 +126,17 @@ export default function AdminUsersScreen() {
   useEffect(() => {
     if (userListPage > userListPageCount) setUserListPage(userListPageCount);
   }, [userListPage, userListPageCount]);
+
+  /**
+   * Stack ekranı sekmede açık kalır; sekmeden sonra başka admin sayfasına geçince
+   * useEffect yeniden tetiklenmez — odaklanınca listeyi yenile.
+   */
+  useFocusEffect(
+    useCallback(() => {
+      void loadHasAdmin();
+      if (session && profile?.role === 'admin') void loadProfiles();
+    }, [loadHasAdmin, session, profile?.role, loadProfiles])
+  );
 
   useEffect(() => {
     if (Platform.OS !== 'web' || typeof window === 'undefined') return;

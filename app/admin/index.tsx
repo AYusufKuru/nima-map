@@ -10,7 +10,7 @@ import {
     presetOperatorPairs,
 } from '@/utils/reportOperators';
 import { MaterialIcons } from '@expo/vector-icons';
-import { Link, Redirect, router } from 'expo-router';
+import { Link, Redirect, router, useFocusEffect } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import type { ViewStyle } from 'react-native';
 import {
@@ -445,6 +445,12 @@ export default function AdminScreen() {
       setRawRows([]);
     }
   }, [session, isAdmin, selectedProvince, runQuery]);
+
+  useFocusEffect(
+    useCallback(() => {
+      if (session && isAdmin && selectedProvince.trim()) void runQuery();
+    }, [session, isAdmin, selectedProvince, runQuery])
+  );
 
   useEffect(() => {
     if (Platform.OS !== 'web' || typeof window === 'undefined') return;

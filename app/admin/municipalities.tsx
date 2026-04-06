@@ -7,8 +7,8 @@ import { useMunicipalities } from '@/contexts/MunicipalitiesContext';
 import { asHref } from '@/utils/asHref';
 import { MaterialIcons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
-import { Link, Redirect } from 'expo-router';
-import { useRef, useState } from 'react';
+import { Link, Redirect, useFocusEffect } from 'expo-router';
+import { useCallback, useRef, useState } from 'react';
 import {
   ActivityIndicator,
   Image,
@@ -417,6 +417,12 @@ export default function AdminMunicipalitiesScreen() {
   };
 
   const confirmDelete = (row: MunicipalityDef) => setDeleteTarget(row);
+
+  useFocusEffect(
+    useCallback(() => {
+      if (isAdmin) void refresh();
+    }, [isAdmin, refresh])
+  );
 
   if (authLoading && !session) {
     return (
