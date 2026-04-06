@@ -11,14 +11,15 @@ const DEFAULT_ALLOWED_ORIGINS = [
   'http://127.0.0.1:8081',
   'http://localhost:19006',
   'http://localhost:19000',
+  'https://nima-map.vercel.app',
 ];
 
 const MAX_BODY_BYTES = 48_000;
 
 function parseAllowedOrigins(): string[] {
   const raw = Deno.env.get('ALLOWED_ORIGINS')?.trim();
-  if (!raw) return DEFAULT_ALLOWED_ORIGINS;
-  return raw.split(',').map((s) => s.trim()).filter(Boolean);
+  const extra = raw ? raw.split(',').map((s) => s.trim()).filter(Boolean) : [];
+  return [...new Set([...DEFAULT_ALLOWED_ORIGINS, ...extra])];
 }
 
 function corsHeaders(req: Request, allowed: string[]): Record<string, string> | null {

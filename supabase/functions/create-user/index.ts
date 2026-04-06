@@ -3,8 +3,8 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.45.0';
 
 /**
  * Tarayıcıdan Edge Function çağrısı için izin verilen Origin’ler (CORS).
- * Supabase’te `ALLOWED_ORIGINS` secret’ı tanımlıysa bu liste yerine o kullanılır
- * (virgülle ayırın; production + localhost’u birlikte yazın).
+ * `ALLOWED_ORIGINS` secret’ı varsa **ek** kökenler olarak bu listeye birleştirilir;
+ * yalnızca secret kullanılırsa production (Vercel) unutulup CORS kırılıyordu.
  */
 const DEFAULT_ALLOWED_ORIGINS = [
   'http://localhost:8081',
@@ -18,8 +18,8 @@ const MAX_BODY_BYTES = 48_000;
 
 function parseAllowedOrigins(): string[] {
   const raw = Deno.env.get('ALLOWED_ORIGINS')?.trim();
-  if (!raw) return DEFAULT_ALLOWED_ORIGINS;
-  return raw.split(',').map((s) => s.trim()).filter(Boolean);
+  const extra = raw ? raw.split(',').map((s) => s.trim()).filter(Boolean) : [];
+  return [...new Set([...DEFAULT_ALLOWED_ORIGINS, ...extra])];
 }
 
 /**
